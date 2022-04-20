@@ -271,7 +271,7 @@ sia.[R]
 order by sia.CUSTOMER_ID,
 		sia.BRANDFAMILY_ID,
 		sia.CAL_DATE 
-		
+;
 		
 /*############################################################################*/
 
@@ -325,9 +325,8 @@ INCLUDE ( [NUM_SELLING_DAYS],
 go
 
 CREATE STATISTICS [_dta_stat_1952062040_2_9_10] ON [dbo].[XXX_P_Sell_INOUT_Activities_10d]([tercio], [CUSTOMER_ID], [BRANDFAMILY_ID])
-go
-		
-;
+go	
+
 SET @t2 = GETDATE();
 SELECT '06.P_Sell_INOUT_Activities_10d.sql' as SCRIPT,
 DATEDIFF(mi,@t1,@t2) AS elapsed_min;
