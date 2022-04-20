@@ -119,8 +119,8 @@ case when a13.[BRANDFAMILY_ID] in ('BF999999','BF999998') then MM.BrandFamily_id
 
 upper(case when a12.Item_type not in ('CLIPPER', 'MECHERO', 'AZAFATA', 'TOTEM', 'DISPENSADOR', 'SVM', 'TFT') then
 	case when  a11.Investment_type not in ('ABP','Azafatas','CUE') then 'VISIBILIDAD' else a11.Investment_type end 
-else a12.Item_type end +
-	case when a12.[Concepto]<> 'BAU' and a11.Investment_type <> 'ABP' and a12.Item_type not in ( 'dispensador')then '_ESP' else '' end ) Investment,	
+else a12.Item_type end /*+
+	case when a12.[Concepto]<> 'BAU' and a11.Investment_type <> 'ABP' and a12.Item_type not in ( 'dispensador')then '_ESP' else '' end */) Investment,	
    
    
 	sum(case 
@@ -159,8 +159,8 @@ a11.[Customer_ID],
 case when a13.[BRANDFAMILY_ID] in ('BF999999','BF999998') then MM.BrandFamily_id else a13.BRANDFAMILY_ID end,
 upper(case when a12.Item_type not in ('CLIPPER', 'MECHERO', 'AZAFATA', 'TOTEM', 'DISPENSADOR', 'SVM', 'TFT') then
 	case when  a11.Investment_type not in ('ABP','Azafatas','CUE') then 'VISIBILIDAD' else a11.Investment_type end 
-else a12.Item_type end +
-	case when a12.[Concepto]<> 'BAU' and a11.Investment_type <> 'ABP' and a12.Item_type not in ( 'dispensador')then '_ESP' else '' end )
+else a12.Item_type end /*+
+	case when a12.[Concepto]<> 'BAU' and a11.Investment_type <> 'ABP' and a12.Item_type not in ( 'dispensador')then '_ESP' else '' end */)
 	
 )
 
@@ -190,7 +190,7 @@ select 	*
 into [STAGING_2].[dbo].XXX_P_invest_column
 from invest_clean
 	Pivot ( sum(Intensidad) for 
-		Investment in (MECHERO, CLIPPER, ABP,DISPENSADOR, VISIBILIDAD, VISIBILIDAD_ESP ,AZAFATA, TOTEM, TOTEM_ESP, SVM, TFT, CUE))
+		Investment in (MECHERO, CLIPPER, ABP,DISPENSADOR, VISIBILIDAD, AZAFATA, TOTEM, SVM, TFT, CUE))
 	AS tablaPitot
 
 
@@ -325,10 +325,10 @@ select
   sum( isnull(ABP,0))            ABP,
   sum( isnull(DISPENSADOR,0))    DISPENSADOR,
   sum( isnull(VISIBILIDAD,0))    VISIBILIDAD,
-  sum( isnull(VISIBILIDAD_ESP,0))VISIBILIDAD_ESP,
+ -- sum( isnull(VISIBILIDAD_ESP,0))VISIBILIDAD_ESP,
   sum( isnull(AZAFATA,0))        AZAFATA,
   sum( isnull(TOTEM,0))          TOTEM,
-  sum( isnull(TOTEM_ESP,0))      TOTEM_ESP,
+ -- sum( isnull(TOTEM_ESP,0))      TOTEM_ESP,
   sum( isnull(SVM,0))            SVM,
   sum( isnull(TFT,0))            TFT,
   sum( isnull(CUE,0))            CUE,
@@ -338,10 +338,10 @@ select
   isnull( sum(1.*ABP)/nullif(s.NUM_DAYS,0),0) PERC_ABP,  
   isnull( sum(1.*DISPENSADOR)/nullif(s.NUM_DAYS,0),0) PERC_DISPENSADOR,  
   isnull( sum(1.*VISIBILIDAD)/nullif(s.NUM_DAYS,0),0) PERC_VISIBILIDAD,  
-  isnull( sum(1.*VISIBILIDAD_ESP)/nullif(s.NUM_DAYS,0),0)PERC_VISIBILIDAD_ESP,
+--  isnull( sum(1.*VISIBILIDAD_ESP)/nullif(s.NUM_DAYS,0),0)PERC_VISIBILIDAD_ESP,
   isnull( sum(1.*AZAFATA)/nullif(s.NUM_DAYS,0),0) PERC_AZAFATA,  
   isnull( sum(1.*TOTEM)/nullif(s.NUM_DAYS,0),0) PERC_TOTEM,  
-  isnull( sum(1.*TOTEM_ESP)/nullif(s.NUM_DAYS,0),0) PERC_TOTEM_ESP,  
+--  isnull( sum(1.*TOTEM_ESP)/nullif(s.NUM_DAYS,0),0) PERC_TOTEM_ESP,  
   isnull( sum(1.*SVM)/nullif(s.NUM_DAYS,0),0) PERC_SVM,  
   isnull( sum(1.*TFT)/nullif(s.NUM_DAYS,0),0) PERC_TFT,  
   isnull( sum(1.*CUE)/nullif(s.NUM_DAYS,0),0) PERC_CUE,  

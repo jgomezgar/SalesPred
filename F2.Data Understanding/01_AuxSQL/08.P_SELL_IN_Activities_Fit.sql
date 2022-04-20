@@ -38,10 +38,10 @@ SELECT s.R
       ,case when s.[PERC_ABP] > 1 then 3 else ceiling(round(s.[PERC_ABP]/3,1)*10)end [ABP]
       ,case when ceiling(round(s.PERC_DISPENSADOR*10,0)/3) > 3 then 3 else  ceiling(round(s.PERC_DISPENSADOR*10,0)/3) end DISPENSADOR
       ,case when s.[PERC_VISIBILIDAD] > 3 then 3 when s.[PERC_VISIBILIDAD] < 0.35 then 0 else ceiling(round(s.[PERC_VISIBILIDAD],1)) end  VISIBILIDAD
-      ,case when s.[PERC_VISIBILIDAD_ESP] > 3 then 3 when s.[PERC_VISIBILIDAD_ESP] < 0.35 then 0 else ceiling(round(s.[PERC_VISIBILIDAD_ESP] ,1))end  VISIBILIDAD_ESP
+--      ,case when s.[PERC_VISIBILIDAD_ESP] > 3 then 3 when s.[PERC_VISIBILIDAD_ESP] < 0.35 then 0 else ceiling(round(s.[PERC_VISIBILIDAD_ESP] ,1))end  VISIBILIDAD_ESP
       ,case when s.[AZAFATA] > 3 then 3 else s.[AZAFATA] end [AZAFATA]
       ,case when s.[PERC_TOTEM] > 2 then 2 when s.[PERC_TOTEM] < 0.35 then 0 else ceiling(round(s.[PERC_TOTEM],1)) end  [TOTEM]
-      ,case when s.[PERC_TOTEM_ESP] > 2 then 2 when s.[PERC_TOTEM_ESP] < 0.35 then 0 else ceiling(round(s.[PERC_TOTEM_ESP],1)) end [TOTEM_ESP]
+--      ,case when s.[PERC_TOTEM_ESP] > 2 then 2 when s.[PERC_TOTEM_ESP] < 0.35 then 0 else ceiling(round(s.[PERC_TOTEM_ESP],1)) end [TOTEM_ESP]
 	  ,case when s.[visit] > 3 then 3 else s.[visit] end [visit]
 FROM [STAGING_2].[dbo].[XXX_P_Sell_IN_Activities_10d] s 
 )
@@ -78,11 +78,11 @@ select
             r.DISPENSADOR,
             ceiling(round(isnull(r.DISPENSADOR,0)*10.0 + isnull(r1.DISPENSADOR,0) *0.666 +isnull(r2.DISPENSADOR,0)*0.334,0)) DISPENSADOR_int,
             r.VISIBILIDAD,
-            r.VISIBILIDAD_ESP,
+ --           r.VISIBILIDAD_ESP,
             r.AZAFATA, r1.AZAFATA AZAFATA_1,r2.AZAFATA AZAFATA_2,
             ceiling(round(isnull(r.AZAFATA,0)*10.0 + isnull(r1.AZAFATA,0) *0.666 +isnull(r2.AZAFATA,0)*0.334,0)) AZAFATA_int,
             r.TOTEM,
-            r.TOTEM_ESP,
+ --           r.TOTEM_ESP,
             ceiling(round(isnull(r.visit,0)*10.0 + isnull(r1.visit,0) *0.666 +isnull(r2.visit,0)*0.334,0)) visit_int,
             r.SI_MRKT_WSE,
             r.QUOTA_SELLIN,

@@ -84,10 +84,10 @@ SELECT sia.[R]
       ,sia.[ABP]
       ,sia.[DISPENSADOR]
       ,sia.[VISIBILIDAD]
-      ,sia.[VISIBILIDAD_ESP]
+--      ,sia.[VISIBILIDAD_ESP]
       ,sia.[AZAFATA]
       ,sia.[TOTEM]
-      ,sia.[TOTEM_ESP]
+--      ,sia.[TOTEM_ESP]
       ,sia.[SVM]
       ,sia.[TFT]
       ,sia.[CUE]
@@ -97,10 +97,10 @@ SELECT sia.[R]
       ,sia.[PERC_ABP]
       ,sia.[PERC_DISPENSADOR]
       ,sia.[PERC_VISIBILIDAD]
-      ,sia.[PERC_VISIBILIDAD_ESP]
+ --     ,sia.[PERC_VISIBILIDAD_ESP]
       ,sia.[PERC_AZAFATA]
       ,sia.[PERC_TOTEM]
-      ,sia.[PERC_TOTEM_ESP]
+--      ,sia.[PERC_TOTEM_ESP]
       ,sia.[PERC_SVM]
       ,sia.[PERC_TFT]
       ,sia.[PERC_CUE]
@@ -132,10 +132,10 @@ GROUP by
       ,sia.[ABP]
       ,sia.[DISPENSADOR]
       ,sia.[VISIBILIDAD]
-      ,sia.[VISIBILIDAD_ESP]
+ --     ,sia.[VISIBILIDAD_ESP]
       ,sia.[AZAFATA]
       ,sia.[TOTEM]
-      ,sia.[TOTEM_ESP]
+--      ,sia.[TOTEM_ESP]
       ,sia.[SVM]
       ,sia.[TFT]
       ,sia.[CUE]
@@ -145,10 +145,10 @@ GROUP by
       ,sia.[PERC_ABP]
       ,sia.[PERC_DISPENSADOR]
       ,sia.[PERC_VISIBILIDAD]
-      ,sia.[PERC_VISIBILIDAD_ESP]
+ --     ,sia.[PERC_VISIBILIDAD_ESP]
       ,sia.[PERC_AZAFATA]
       ,sia.[PERC_TOTEM]
-      ,sia.[PERC_TOTEM_ESP]
+--      ,sia.[PERC_TOTEM_ESP]
       ,sia.[PERC_SVM]
       ,sia.[PERC_TFT]
       ,sia.[PERC_CUE]
@@ -197,10 +197,10 @@ SELECT sia.[R]
       ,sia.[ABP]
       ,sia.[DISPENSADOR]
       ,sia.[VISIBILIDAD]
-      ,sia.[VISIBILIDAD_ESP]
+ --     ,sia.[VISIBILIDAD_ESP]
       ,sia.[AZAFATA]
       ,sia.[TOTEM]
-      ,sia.[TOTEM_ESP]
+ --     ,sia.[TOTEM_ESP]
       ,sia.[SVM]
       ,sia.[TFT]
       ,sia.[CUE]
@@ -210,10 +210,10 @@ SELECT sia.[R]
       ,sia.[PERC_ABP]
       ,sia.[PERC_DISPENSADOR]
       ,sia.[PERC_VISIBILIDAD]
-      ,sia.[PERC_VISIBILIDAD_ESP]
+  --    ,sia.[PERC_VISIBILIDAD_ESP]
       ,sia.[PERC_AZAFATA]
       ,sia.[PERC_TOTEM]
-      ,sia.[PERC_TOTEM_ESP]
+  --    ,sia.[PERC_TOTEM_ESP]
       ,sia.[PERC_SVM]
       ,sia.[PERC_TFT]
       ,sia.[PERC_CUE]
@@ -247,10 +247,10 @@ sia.[R]
       ,sia.[ABP]
       ,sia.[DISPENSADOR]
       ,sia.[VISIBILIDAD]
-      ,sia.[VISIBILIDAD_ESP]
+  --    ,sia.[VISIBILIDAD_ESP]
       ,sia.[AZAFATA]
       ,sia.[TOTEM]
-      ,sia.[TOTEM_ESP]
+ --     ,sia.[TOTEM_ESP]
       ,sia.[SVM]
       ,sia.[TFT]
       ,sia.[CUE]
@@ -260,10 +260,10 @@ sia.[R]
       ,sia.[PERC_ABP]
       ,sia.[PERC_DISPENSADOR]
       ,sia.[PERC_VISIBILIDAD]
-      ,sia.[PERC_VISIBILIDAD_ESP]
+ --     ,sia.[PERC_VISIBILIDAD_ESP]
       ,sia.[PERC_AZAFATA]
       ,sia.[PERC_TOTEM]
-      ,sia.[PERC_TOTEM_ESP]
+--      ,sia.[PERC_TOTEM_ESP]
       ,sia.[PERC_SVM]
       ,sia.[PERC_TFT]
       ,sia.[PERC_CUE]
@@ -274,7 +274,7 @@ order by sia.CUSTOMER_ID,
 ;
 		
 /*############################################################################*/
-
+/*
 use [STAGING_2]
 go
 
@@ -301,10 +301,10 @@ INCLUDE ( [NUM_SELLING_DAYS],
 [ABP],
 [DISPENSADOR],
 [VISIBILIDAD],
-[VISIBILIDAD_ESP],
+--[VISIBILIDAD_ESP],
 [AZAFATA],
 [TOTEM],
-[TOTEM_ESP],
+--[TOTEM_ESP],
 [SVM],
 [TFT],
 [CUE],
@@ -314,10 +314,10 @@ INCLUDE ( [NUM_SELLING_DAYS],
 [PERC_ABP],
 [PERC_DISPENSADOR],
 [PERC_VISIBILIDAD],
-[PERC_VISIBILIDAD_ESP],
+--[PERC_VISIBILIDAD_ESP],
 [PERC_AZAFATA],
 [PERC_TOTEM],
-[PERC_TOTEM_ESP],
+--[PERC_TOTEM_ESP],
 [PERC_SVM],
 [PERC_TFT],
 [PERC_CUE],
@@ -326,7 +326,7 @@ go
 
 CREATE STATISTICS [_dta_stat_1952062040_2_9_10] ON [dbo].[XXX_P_Sell_INOUT_Activities_10d]([tercio], [CUSTOMER_ID], [BRANDFAMILY_ID])
 go	
-
+*/
 SET @t2 = GETDATE();
 SELECT '06.P_Sell_INOUT_Activities_10d.sql' as SCRIPT,
 DATEDIFF(mi,@t1,@t2) AS elapsed_min;
