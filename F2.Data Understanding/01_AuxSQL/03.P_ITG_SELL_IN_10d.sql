@@ -227,7 +227,8 @@ select	RANK() over (partition by i.CUSTOMER_ID,i.BRANDFAMILY_ID order by i.CAL_D
 		i.BRANDFAMILY_ID,
 		i.SI_ITG_WSE,
 		sum(SI_Mrkt_WSE_adjust) over (partition by i.CUSTOMER_ID, i.CAL_DATE) SI_Mrkt_WSE_adjust,
-		sum(SI_Mrkt_WSE_adjust) over (partition by i.CUSTOMER_ID, i.CAL_DATE) + m.SI_Mrkt_WSE SI_Mrkt_WSE
+		case when m.SI_Mrkt_WSE< sum(i.SI_ITG_WSE) over (partition by i.CUSTOMER_ID, i.CAL_DATE)  then sum(i.SI_ITG_WSE) over (partition by i.CUSTOMER_ID, i.CAL_DATE)  else m.SI_Mrkt_WSE end + 
+			case when sum(SI_Mrkt_WSE_adjust) over (partition by i.CUSTOMER_ID, i.CAL_DATE) + m.SI_Mrkt_WSE  < sum(i.SI_ITG_WSE) over (partition by i.CUSTOMER_ID, i.CAL_DATE)  then 0 else sum(SI_Mrkt_WSE_adjust) over (partition by i.CUSTOMER_ID, i.CAL_DATE) end SI_Mrkt_WSE
 into [STAGING_2].[dbo].XXX_P_Sell_IN_Periods_10d		
 from  [STAGING_2].[dbo].XXX_P_Sell_IN_ITG_10d I join [STAGING_2].[dbo].XXX_P_Sell_IN_Mrkt_10d m
   on i.CUSTOMER_ID=m.CUSTOMER_ID and

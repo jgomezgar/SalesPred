@@ -4,12 +4,12 @@
 *.bin
 *.pkl
 *.npy
+*.py
 *.h5
 *.xlsx
 *.docx
 *.png
 *.zip
-*.ipynb
 *.xlsx
 *.tmp
 *.xls

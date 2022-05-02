@@ -147,6 +147,7 @@ Select
 --	s.BRANDFAMILY_ID,
 --	s.Midcategory,
 --	sum(s.SI_WSE_adjust - s.SI_WSE) SI_MRKT_adjust,
+	sum(s.Mrkt_WSE_median) Mrkt_WSE_median,
 	sum(s.Mrkt_WSE_fit) Mrkt_WSE_fit
 from [STAGING_2].[dbo].XXX_P_Sell_IN_Mrkt_fit s
 join [STAGING_2].[dbo].XXX_P_sacas_periods p
@@ -176,6 +177,7 @@ select  t.r R,
 	t.[CUSTOMER_ID],
 --	t.[BRANDFAMILY_ID],
 --	t.Midcategory,
+	ceiling( t.Mrkt_WSE_median) Mrkt_WSE_median,
 	ceiling( t.Mrkt_WSE_fit) Mrkt_WSE_fit
 into [STAGING_2].[dbo].XXX_P_Sell_IN_Mrkt_Periods
 from ITG_Sell_IN_top t
@@ -188,6 +190,7 @@ group by t.r ,
 	t.[CUSTOMER_ID],
 --	t.[BRANDFAMILY_ID],
 --	t.Midcategory,
+	ceiling( t.Mrkt_WSE_median),
 	ceiling(t.Mrkt_WSE_fit)
 	            
  order by 	t.CUSTOMER_ID,	--t.BRANDFAMILY_ID, 
