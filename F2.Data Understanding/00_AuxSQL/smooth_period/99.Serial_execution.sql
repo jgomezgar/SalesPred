@@ -1,4 +1,4 @@
-:setvar Qpath "C:\Users\1011867\OneDrive - IMPERIAL TOBACCO LTD\UOC\01.Data Science\TFM\SalesPred\F2.Data Understanding\01_AuxSQL"
+:setvar Qpath "C:\Users\1011867\OneDrive - IMPERIAL TOBACCO LTD\UOC\01.Data Science\TFM\SalesPred\F2.Data Understanding\00_AuxSQL"
 
 
 :r  $(Qpath)\01.P_ITG_SELL_IN.sql
