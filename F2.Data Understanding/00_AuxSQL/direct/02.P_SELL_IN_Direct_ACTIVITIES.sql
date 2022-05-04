@@ -229,7 +229,7 @@ select
 	p.tercio,
 	p.NUM_SELLING_DAYS,
 	p.NUM_DAYS,
-	--p.days_btw_order,
+	p.days_btw_order,
 	COUNT(distinct s.cal_date) num_orders,
 	p.date_init,
 	p.date_end,
@@ -249,7 +249,7 @@ group by
 	p.tercio,
 	p.NUM_SELLING_DAYS,
 	p.NUM_DAYS,
---	p.days_btw_order,
+	p.days_btw_order,
 	p.date_init, 
 	p.date_end,
 	p.CUSTOMER_ID,
@@ -267,7 +267,7 @@ select
 	s.tercio,
 	s.NUM_SELLING_DAYS,
 	s.NUM_DAYS,
---	s.days_btw_order,
+	s.days_btw_order,
 	s.num_orders,
   s.DATE_init,
   s.DATE_end,
@@ -289,7 +289,7 @@ group by
 	s.tercio,
 	s.NUM_SELLING_DAYS,
 	s.NUM_DAYS,
---	s.days_btw_order,
+	s.days_btw_order,
 	s.num_orders,
   s.DATE_init,
   s.DATE_end,
@@ -305,7 +305,7 @@ IF OBJECT_ID('[STAGING_2].[dbo].XXX_P_Sell_IN_Direct_Activities_10d', 'U') IS NO
  DROP TABLE [STAGING_2].[dbo].XXX_P_Sell_IN_Direct_Activities_10d;
 
 select 
-  s.R,
+--  s.R,
 	s.tercio,
 	s.NUM_SELLING_DAYS,
 	s.NUM_DAYS,
@@ -353,7 +353,7 @@ left join [STAGING_2].[dbo].XXX_P_invest_column i
   and i.CAL_DATE between s.DATE_init and s.DATE_end	
 where  S.DATE_init  >= '2017-04-01'	 
 group by
-  s.R,
+--  s.R,
 	s.tercio,
 	s.NUM_SELLING_DAYS,
 	s.NUM_DAYS,
@@ -363,7 +363,7 @@ group by
   s.DATE_end,
   s.CUSTOMER_ID,
   s.BRANDFAMILY_ID,
---  s.Midcategory,
+ -- s.Midcategory,
   s.SI_ITG_WSE,
   s.SI_MRKT_WSE,
   s.QUOTA_SELLIN,

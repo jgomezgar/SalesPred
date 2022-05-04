@@ -26,13 +26,13 @@ SELECT [R] = row_number() over (partition by c0.[CUSTOMER_ID] order by [DATE_ini
       [tercio],
       [NUM_SELLING_DAYS],
       [NUM_DAYS],
-  --    ceiling(min(1.0*[days_btw_order])) [days_btw_order],
+      ceiling(min(1.0*days_btw_order)) days_btw_order,
       ceiling(avg(1.0*[num_orders])) [num_orders],
       [DATE_init],
       [DATE_end],
       c0.[CUSTOMER_ID],
       'ITG-TOTAL' [BRANDFAMILY_ID],
-    --  ,[Midcategory]
+      --[Midcategory]
         sum([SI_ITG_WSE]) [SI_ITG_WSE],
 		[SI_MRKT_WSE] ,
 		sum([QUOTA_SELLIN] ) [QUOTA_SELLIN] ,
@@ -63,7 +63,7 @@ SELECT [R] = row_number() over (partition by c0.[CUSTOMER_ID] order by [DATE_ini
 		avg([PERC_CUE] ) [PERC_CUE] ,
 		avg([PERC_visit] ) [PERC_visit]
 	into [STAGING_2].[dbo].XXX_P_TOTAL_Sell_IN_Direct_Activities_10d	
-  FROM [STAGING_2].[dbo].[XXX_P_Sell_IN_Direct_Activities_10d] c0
+  FROM [STAGING_2].[dbo].[XXX_P_Sell_IN_Direct_Activities_10d] c0 
 --join ITE.LU_CLTE_1CANAL	a11 on a11.customer_id = c0.customer_id
 
 /*where	a11.[Siebel_Segment] in (N'DOM')
@@ -86,5 +86,5 @@ group by
       
 ;
 SET @t2 = GETDATE();
-SELECT '05.P_TOTAL_Sell_y_Activities_10d.sql' as SCRIPT,
+SELECT '03.P_TOTAL_Sell_IN_Direct_Activities_10d.sql' as SCRIPT,
 DATEDIFF(mi,@t1,@t2) AS elapsed_min;

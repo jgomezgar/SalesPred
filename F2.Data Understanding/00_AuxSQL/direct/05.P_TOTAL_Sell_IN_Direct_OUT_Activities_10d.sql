@@ -21,14 +21,14 @@ SET @t1 = GETDATE();
 IF OBJECT_ID('[STAGING_2].[dbo].XXX_P_TOTAL_Sell_IN_Direct_OUT_Activities_10d', 'U') IS NOT NULL
  DROP TABLE [STAGING_2].[dbo].XXX_P_TOTAL_Sell_IN_Direct_OUT_Activities_10d;
 
-SELECT [R] = row_number() over (partition by c0.[CUSTOMER_ID] order by [CAL_DATE] ) -1 ,
+SELECT-- [R] = row_number() over (partition by c0.[CUSTOMER_ID] order by [DATE_init] ) -1 ,
       [tercio],
       [NUM_SELLING_DAYS],
       [NUM_DAYS],
       ceiling(min(1.0*[days_btw_order])) [days_btw_order],
       ceiling(avg(1.0*[num_orders])) [num_orders],
-      [CAL_DATE],
-      [CAL_DATE_end],
+      [DATE_init],
+      [DATE_end],
       c0.[CUSTOMER_ID],
       'ITG-TOTAL' [BRANDFAMILY_ID],
     --  ,[Midcategory]
@@ -81,8 +81,8 @@ group by
 	  [tercio],
       [NUM_SELLING_DAYS],
       [NUM_DAYS],
-      [CAL_DATE],
-      [CAL_DATE_end],
+      [DATE_init],
+      [DATE_end],
       c0.[CUSTOMER_ID],
       [SI_MRKT_WSE],
       [SO_MRKT_WSE]

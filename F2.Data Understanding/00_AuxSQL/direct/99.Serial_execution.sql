@@ -3,7 +3,7 @@
 
 :--r  $(Qpath)\01.P_SELL_IN_direct.sql
 
-:r  $(Qpath)\02.P_SELL_IN_Direct_ACTIVITIES.sql
+--:r  $(Qpath)\02.P_SELL_IN_Direct_ACTIVITIES.sql
 :r  $(Qpath)\03.P_SELL_IN_Direct_ACTIVITIES_TOTAL.sql
 
 

@@ -33,7 +33,8 @@ IF OBJECT_ID('[STAGING_2].[dbo].XXX_P_Sell_IN_Direct_ITG', 'U') IS NOT NULL
 		f.[CUSTOMER_ID]  CUSTOMER_ID,
 		b.SUBCATEGORY MIDCATEGORY,
 		b.[BRANDFAMILY_ID]  BRANDFAMILY_ID,
-		ceiling(sum(f.[VOL_EQUI]))  SI_ITG_WSE
+		ceiling(sum(f.[VOL_EQUI]))  SI_ITG_WSE,
+		isnull(nullif(ceiling(DATEDIFF (day,min(d.CAL_DATE) OVER (partition by f.[CUSTOMER_ID], b.BRANDFAMILY_ID ORDER BY d.CAL_DATE ASC ROWS  1 PRECEDING)  ,d.CAL_DATE)),0),99)  days_btw_order 
 into [STAGING_2].[dbo].XXX_P_Sell_IN_Direct_ITG
 from	ITE.FACT_SMLD_Smoke_ITG	f
 	join	ITE.T_DAY	d
@@ -112,6 +113,7 @@ Select
 		bb.date_end,
 		bb.NUM_SELLING_DAYS,
 		bb.NUM_DAYS,
+		min(i.days_btw_order) days_btw_order,
 		isnull(sum(SI_ITG_WSE),0) SI_ITG_WSE,
 		case when isnull(sum(SI_Mrkt_WSE),0)< isnull(sum(SI_ITG_WSE),0) then isnull(sum(SI_ITG_WSE),0) else isnull(sum(SI_Mrkt_WSE),0) end SI_Mrkt_WSE
 into [STAGING_2].[dbo].XXX_P_Sell_IN_Direct_Periods_10d

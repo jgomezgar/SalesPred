@@ -64,14 +64,14 @@ group by a16.[CAL_DATE],
 IF OBJECT_ID('[STAGING_2].[dbo].XXX_P_Sell_IN_Direct_OUT_ITG_Activities_10d', 'U') IS NOT NULL
  DROP TABLE [STAGING_2].[dbo].XXX_P_Sell_IN_Direct_OUT_ITG_Activities_10d;		 
  
-SELECT sia.[R]
-      ,sia.[tercio]
+SELECT --sia.[R]
+       sia.[tercio]
       ,sia.[NUM_SELLING_DAYS]
       ,sia.[NUM_DAYS]
       ,sia.[days_btw_order]
       ,sia.[num_orders]
-      ,sia.[CAL_DATE]
-      ,sia.[CAL_DATE_end]
+      ,sia.DATE_init
+      ,sia.[DATE_end]
       ,sia.[CUSTOMER_ID]
       ,sia.[BRANDFAMILY_ID]
 --      ,sia.[Midcategory]
@@ -110,17 +110,17 @@ SELECT sia.[R]
   join [STAGING_2].[dbo].XXX_Sell_OUT_ITG SO 
 	   on sia.CUSTOMER_ID 	= SO.CUSTOMER_ID and
 		  sia.BRANDFAMILY_ID =	SO.[BRANDFAMILY_ID] and
-		  SO_DATE between sia.CAL_DATE and sia.CAL_DATE_end
-where  sia.CAL_DATE between SO_Start and SO_End
+		  SO_DATE between sia.DATE_init and sia.DATE_end
+where  sia.DATE_init between SO_Start and SO_End
 GROUP by 
-      sia.[R]
-      ,sia.[tercio]
+--      sia.[R]
+       sia.[tercio]
       ,sia.[NUM_SELLING_DAYS]
       ,sia.[NUM_DAYS]
       ,sia.[days_btw_order]
       ,sia.[num_orders]
-      ,sia.[CAL_DATE]
-      ,sia.[CAL_DATE_end]
+      ,sia.DATE_init
+      ,sia.[DATE_end]
       ,sia.[CUSTOMER_ID]
       ,sia.[BRANDFAMILY_ID]
 --      ,sia.[Midcategory]
@@ -175,14 +175,14 @@ with MRKT_SO as (
 	--	a11.[SUBCATEGORY]
 )
 		
-SELECT sia.[R]
-      ,sia.[tercio]
+SELECT --sia.[R]
+      sia.[tercio]
       ,sia.[NUM_SELLING_DAYS]
       ,sia.[NUM_DAYS]
       ,sia.[days_btw_order]
       ,sia.[num_orders]
-      ,sia.[CAL_DATE]
-      ,sia.[CAL_DATE_end]
+      ,sia.[DATE_init]
+      ,sia.[DATE_end]
       ,sia.[CUSTOMER_ID]
       ,sia.[BRANDFAMILY_ID]
 --      ,sia.[Midcategory]
@@ -224,17 +224,17 @@ Into [STAGING_2].[dbo].XXX_P_Sell_IN_Direct_OUT_Activities_10d
  join MRKT_SO SO 
 	   on sia.CUSTOMER_ID 	= SO.CUSTOMER_ID and
 	--	  sia.Midcategory =	SO.Midcategory and
-		  SO.[CAL_DATE] between sia.CAL_DATE and sia.CAL_DATE_end
+		  SO.[CAL_DATE] between sia.[DATE_init] and sia.DATE_end
 
 GROUP by 
-sia.[R]
-      ,sia.[tercio]
+--sia.[R]
+      sia.[tercio]
       ,sia.[NUM_SELLING_DAYS]
       ,sia.[NUM_DAYS]
       ,sia.[days_btw_order]
       ,sia.[num_orders]
-      ,sia.[CAL_DATE]
-      ,sia.[CAL_DATE_end]
+      ,sia.[DATE_init]
+      ,sia.[DATE_end]
       ,sia.[CUSTOMER_ID]
       ,sia.[BRANDFAMILY_ID]
 --      ,sia.[Midcategory]
@@ -270,7 +270,7 @@ sia.[R]
       ,sia.[PERC_visit]
 order by sia.CUSTOMER_ID,
 		sia.BRANDFAMILY_ID,
-		sia.CAL_DATE 
+		sia.[DATE_init] 
 ;
 		
 /*############################################################################*/
@@ -289,7 +289,7 @@ INCLUDE ( [NUM_SELLING_DAYS],
 [NUM_DAYS],
 [days_btw_order],
 [num_orders],
-[CAL_DATE_end],
+[DATE_end],
 [SI_ITG_WSE],
 [SI_MRKT_WSE],
 [QUOTA_SELLIN],
